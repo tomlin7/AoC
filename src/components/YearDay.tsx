@@ -34,7 +34,7 @@ export function YearDaySelector({
           className="text-sm font-medium"
           style={{ color: colors.fg2 }}
         >
-          Year:
+          Year
         </label>
         <select
           id="year"
@@ -56,7 +56,7 @@ export function YearDaySelector({
           className="text-sm font-medium"
           style={{ color: colors.fg2 }}
         >
-          Day:
+          Day
         </label>
         <select
           id="day"

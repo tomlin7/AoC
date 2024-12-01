@@ -1,10 +1,10 @@
-## Advent of Code
+# Advent of Code
 
-This repo is home for my solutions and an editor for [Advent of Code](https://adventofcode.com).
+Home repo for my solutions and an AI powered editor and analysis tool for supercharging Advent of Code! Check the editor out [here](https://aoc24.vercel.app/).
 
 ![screenshot](.github/image.png)
 
-## How to run
+## Getting Started
 
 You will need bun/npm:
 
@@ -12,3 +12,5 @@ You will need bun/npm:
 bun i
 bun run dev
 ```
+
+thats it! You can now visit `localhost:5173` to see the app.

@@ -44,6 +44,11 @@ function App() {
     setCode(value || "");
   };
 
+  // oopen github page
+  const openGithub = () => {
+    window.open("https://github.com/tomlin7/AoC");
+  };
+
   const handleRunCode = async () => {
     setIsPanelOpen(true);
     setPerformance((prev) => ({ ...prev, isAnalyzing: true }));
@@ -95,20 +100,71 @@ function App() {
       style={{ backgroundColor: colors.bg0 }}
     >
       <header
-        style={{ backgroundColor: colors.bg0_h, borderColor: colors.bg1 }}
-        className="border-b flex-none"
+        style={{ backgroundColor: colors.blue, borderColor: colors.bg1 }}
+        className="border-b flex justify-between "
       >
+        <div className="flex">
+          <div
+            className="flex max-h-full items-center gap-2 px-4"
+            style={{
+              backgroundColor: colors.blue,
+            }}
+          >
+            <TreePine className="h-6 w-6" style={{ color: colors.bg0 }} />
+            <h1
+              className="text-xl font-semibold cursor-pointer select-none"
+              style={{
+                color: colors.bg0,
+              }}
+              onClick={openGithub}
+            >
+              tomlin7/AoC
+            </h1>
+          </div>
+
+          <div style={{ overflowY: "clip", position: "relative" }}>
+            <div
+              className="w-2 transform rotate-45"
+              style={{
+                backgroundColor: colors.red,
+                position: "absolute",
+                height: "200%",
+                top: "-50%",
+                left: "0",
+              }}
+            ></div>
+            <div
+              className="w-2 h-full transform rotate-45"
+              style={{
+                backgroundColor: colors.yellow,
+                position: "absolute",
+                height: "200%",
+                top: "-50%",
+                left: "10px",
+              }}
+            ></div>
+            <div
+              className="w-2 h-full transform rotate-45"
+              style={{
+                backgroundColor: colors.green,
+                position: "absolute",
+                height: "200%",
+                top: "-50%",
+                left: "20px",
+              }}
+            ></div>
+          </div>
+        </div>
+
         <div className="max-w-full px-4 py-4">
-          <div className="flex justify-between items-center">
-            <div className="flex items-center gap-2">
-              <TreePine className="h-6 w-6" style={{ color: colors.yellow }} />
-              <h1
-                className="text-xl font-semibold"
-                style={{ color: colors.fg0 }}
-              >
-                tomlin7/AoC
-              </h1>
-            </div>
+          <div className="flex justify-between items-end">
+            {/* <div className="flex items-center">
+              <Github
+                className="h-6 w-6"
+                style={{ color: colors.yellow }}
+                onClick={openGithub}
+              />
+            </div> */}
             <YearDaySelector
               year={year}
               day={day}
