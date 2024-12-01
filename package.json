@@ -7,13 +7,15 @@
     "dev": "concurrently \"node server.js\" \"vite\"",
     "build": "vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "start": "node api/index.js"
   },
   "dependencies": {
     "@google/generative-ai": "^0.21.0",
     "@monaco-editor/react": "^4.6.0",
     "@radix-ui/react-slot": "^1.1.0",
     "@tailwindcss/typography": "^0.5.10",
+    "@vercel/node": "^3.2.27",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cors": "^2.8.5",
