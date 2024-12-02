@@ -34,8 +34,8 @@ jobs:
         run: |
           cd notifier
           python -m pip install --upgrade pip
-          python -m pip install -e .
           python -m pip install pyinstaller
+          python -m pip install -e .
 
       - name: Build notifier (Windows)
         if: runner.os == 'Windows'
