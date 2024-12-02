@@ -41,7 +41,7 @@ jobs:
         if: runner.os == 'Windows'
         run: |
           cd notifier
-          pyinstaller -F -w -i "aoc.ico" --clean -n "AoC" --add-data "aoc.ico;." --add-data "aoc.png;." app.py
+          pyinstaller AoC.spec
 
       - name: Build notifier (macOS/Linux)
         if: runner.os != 'Windows'
