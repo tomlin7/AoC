@@ -3,7 +3,7 @@ const cors = require("cors");
 const express = require("express");
 
 const app = express();
-const PORT = 3000;
+const PORT = 3001;
 
 app.use(cors());
 app.use(express.json());
@@ -13,8 +13,10 @@ const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 const PROMPT =
   "Analyze this code and provide the time and space complexity. Only respond with a raw JSON object containing timeComplexity and spaceComplexity fields. Don't use markdown codeblocks syntax, give raw json text only. Here's the code:";
 
+app.get("/", (req, res) => res.send("Hello!"));
+
 // fetching
-app.get("/api/puzzle/:year/:day", async (req, res) => {
+app.get("/puzzle/:year/:day", async (req, res) => {
   const { year, day } = req.params;
 
   try {
@@ -40,7 +42,7 @@ app.get("/api/puzzle/:year/:day", async (req, res) => {
 });
 
 // analysis
-app.post("/api/analyze", async (req, res) => {
+app.post("/analyze", async (req, res) => {
   const { code } = req.body;
 
   try {
