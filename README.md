@@ -1,4 +1,5 @@
-# Advent of Code
+# Advent of Code 
+![advent-of-code](https://github.com/user-attachments/assets/9e4272e5-2964-4499-ae74-37a9a6c2d293) [![cross-platform-download](https://github.com/user-attachments/assets/e2d74fb8-c6e0-40e9-980d-f1a4aa87fbb2)](https://github.com/tomlin7/AoC/releases/tag/v0.1.0)
 
 Home repo for my solutions and an editor and bench tool for supercharging Advent of Code! 
 
