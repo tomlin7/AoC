@@ -36,14 +36,14 @@ def main():
         current_time_est = datetime.datetime.now(EST_TZ)
         # 12:00 AM EST
         if (
-            current_time_est.hour == 2
-            and current_time_est.minute == 18
+            current_time_est.hour == 0
+            and current_time_est.minute == 0
             and current_time_est.second == 0
         ):
             notify(current_time_est)
             time.sleep(60 * 60 * 24)  # next day
         else:
-            time.sleep(1)  # 30 minutes
+            time.sleep(30 * 60)  # 30 minutes
 
 
 if __name__ == "__main__":
