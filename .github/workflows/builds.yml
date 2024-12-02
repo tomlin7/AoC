@@ -41,13 +41,13 @@ jobs:
         if: runner.os == 'Windows'
         run: |
           cd notifier
-          pyinstaller AoC.spec
+          pyinstaller -F -w -i "aoc.ico" --clean -n "AoC" --add-data "aoc.ico;." --add-data "aoc.png;." aoc_notifier/__main__.py
 
       - name: Build notifier (macOS/Linux)
         if: runner.os != 'Windows'
         run: |
           cd notifier
-          pyinstaller -F -w -i "aoc.ico" --clean -n "AoC" --add-data "aoc.ico:." --add-data "aoc.png:." app.py
+          pyinstaller -F -w -i "aoc.ico" --clean -n "AoC" --add-data "aoc.ico:." --add-data "aoc.png:." aoc_notifier/__main__.py
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
