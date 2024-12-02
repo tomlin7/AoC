@@ -4,27 +4,43 @@ and it will notify you when it's 12:00 AM EST (Advent of Code daily challenge ti
 """
 
 import datetime
+import platform
 import time
 from pathlib import Path
 
 import pytz
-from win11toast import toast
+
+if platform.system() == "Windows":
+    from win11toast import toast
+else:
+    from plyer import notification
+
+    toast = notification.notify
 
 EST_TZ = pytz.timezone("US/Eastern")
-
 image = str(Path("aoc.png").absolute())
 
 
 def notify(current_time_est: datetime.datetime):
-    toast(
-        "Time for Advent of Code 🎄!",
-        "Open day {} challenge".format(current_time_est.day),
-        icon=image,
-        on_click="https://adventofcode.com/{}/day/{}".format(
-            current_time_est.year, current_time_est.day
-        ),
-        audio="ms-winsoundevent:Notification.Looping.Call7",
-    )
+    if platform.system() == "Windows":
+        toast(
+            "Time for Advent of Code 🎄!",
+            "Open day {} challenge".format(current_time_est.day),
+            icon=image,
+            on_click="https://adventofcode.com/{}/day/{}".format(
+                current_time_est.year, current_time_est.day
+            ),
+            audio="ms-winsoundevent:Notification.Looping.Call7",
+        )
+    else:
+        toast(
+            title="Time for Advent of Code 🎄",
+            message="Day {} challenge is out now!".format(current_time_est.day),
+            app_name="AoC",
+            app_icon=str(Path("aoc.ico").absolute()),
+            timeout=10,
+            ticker="AoC",
+        )
 
 
 def main():
@@ -50,4 +66,4 @@ if __name__ == "__main__":
     main()
 
 
-# pyinstaller -F -w -i "aoc.ico" --clean -n "AoC" --add-data "aoc.png;." app.py
+# pyinstaller -F -w -i "aoc.ico" --clean -n "AoC" --add-data "aoc.ico;." --add-data "aoc.png;." app.py

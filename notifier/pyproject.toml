@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "aoc-notifier"
+version = "0.1.0"
+description = ""
+authors = ["Billy <billydevbusiness@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+plyer = "^2.1.0"
+win11toast = { version = "^0.35", platform = "win32" }
+pytz = "^2024.2"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
