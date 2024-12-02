@@ -43,14 +43,8 @@ jobs:
           cd notifier
           pyinstaller -F -w -i "aoc.ico" --clean -n "AoC" --add-data "aoc.ico;." --add-data "aoc.png;." aoc_notifier/__main__.py
 
-      - name: Build notifier (macOS)
-        if: runner.os == 'macOS'
-        run: |
-          cd notifier
-          pyinstaller -F -w -i "aoc.icns" --clean -n "AoC" --add-data "aoc.ico:." --add-data "aoc.png:." aoc_notifier/__main__.py
-
-      - name: Build notifier (Linux)
-        if: runner.os == 'Linux'
+      - name: Build notifier (macOS/Linux)
+        if: runner.os != 'Windows'
         run: |
           cd notifier
           pyinstaller -F -w -i "aoc.ico" --clean -n "AoC" --add-data "aoc.ico:." --add-data "aoc.png:." aoc_notifier/__main__.py
