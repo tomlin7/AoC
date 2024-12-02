@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "aoc-notifier"
+name = "aoc_notifier"
 version = "0.1.0"
 description = ""
 authors = ["Billy <billydevbusiness@gmail.com>"]

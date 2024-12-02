@@ -2,7 +2,7 @@
 
 
 a = Analysis(
-    ['app.py'],
+    ['aoc_notifier\\__main__.py'],
     pathex=[],
     binaries=[],
     datas=[('aoc.ico', '.'), ('aoc.png', '.')],

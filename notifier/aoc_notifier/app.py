@@ -62,8 +62,4 @@ def main():
             time.sleep(30 * 60)  # 30 minutes
 
 
-if __name__ == "__main__":
-    main()
-
-
 # pyinstaller -F -w -i "aoc.ico" --clean -n "AoC" --add-data "aoc.ico;." --add-data "aoc.png;." app.py
