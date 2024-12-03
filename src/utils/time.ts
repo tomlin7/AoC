@@ -1,5 +1,7 @@
 export function getEstNow() {
-  return new Date(new Date().toLocaleString("en-US", { timeZone: "America/New_York" }));
+  return new Date(
+    new Date().toLocaleString("en-US", { timeZone: "America/New_York" })
+  );
 }
 
 export function getEstMidnight(date: Date) {
@@ -10,11 +12,11 @@ export function getEstMidnight(date: Date) {
 
 export function getNextPuzzleInfo() {
   const estNow = getEstNow();
-  
+
   // dec, bfore 25
   if (estNow.getMonth() === 11 && estNow.getDate() <= 25) {
     const todayMidnight = getEstMidnight(estNow);
-    
+
     // after midnight, next puzzle tomorrow
     if (estNow > todayMidnight) {
       const tomorrow = new Date(estNow);
@@ -22,50 +24,56 @@ export function getNextPuzzleInfo() {
       return {
         date: getEstMidnight(tomorrow),
         year: tomorrow.getFullYear(),
-        day: tomorrow.getDate()
+        day: tomorrow.getDate(),
       };
     }
-    
+
     // before midnight, next puzzle at midnight
     return {
       date: todayMidnight,
       year: estNow.getFullYear(),
-      day: estNow.getDate()
+      day: estNow.getDate(),
     };
   }
 
   // If not in dec yet, next puzzle on dec 1
-  // If after 25th, next puzzle on dec 1 next year 
-  const nextYear = estNow.getMonth() === 11 && estNow.getDate() > 25 
-    ? estNow.getFullYear() + 1 
-    : estNow.getFullYear();
-    
+  // If after 25th, next puzzle on dec 1 next year
+  const nextYear =
+    estNow.getMonth() === 11 && estNow.getDate() > 25
+      ? estNow.getFullYear() + 1
+      : estNow.getFullYear();
+
   return {
     date: new Date(nextYear, 11, 1),
     year: nextYear,
-    day: 1
+    day: 1,
   };
 }
 
 export function getCurrentPuzzleInfo() {
   const estNow = getEstNow();
-  
+
   // dec, bw 1-25
-  if (estNow.getMonth() === 11 && estNow.getDate() >= 1 && estNow.getDate() <= 25) {
+  if (
+    estNow.getMonth() === 11 &&
+    estNow.getDate() >= 1 &&
+    estNow.getDate() <= 25
+  ) {
     return {
       year: estNow.getFullYear(),
-      day: estNow.getDate()
+      day: estNow.getDate(),
     };
   }
-  
-  // before dec / after dec 25 -- return latest 
-  const year = estNow.getMonth() === 11 && estNow.getDate() > 25 
-    ? estNow.getFullYear() 
-    : estNow.getFullYear() - 1;
-    
+
+  // before dec / after dec 25 -- return latest
+  const year =
+    estNow.getMonth() === 11 && estNow.getDate() > 25
+      ? estNow.getFullYear()
+      : estNow.getFullYear() - 1;
+
   return {
     year,
-    day: 25
+    day: 25,
   };
 }
 

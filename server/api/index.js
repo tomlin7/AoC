@@ -1,7 +1,7 @@
 const { GoogleGenerativeAI } = require("@google/generative-ai");
 const cors = require("cors");
 const express = require("express");
-
+const vm = require("node:vm");
 const app = express();
 const PORT = 3001;
 
@@ -14,6 +14,32 @@ const PROMPT =
   "Analyze this code and provide the time and space complexity. Only respond with a raw JSON object containing timeComplexity and spaceComplexity fields. Don't use markdown codeblocks syntax, give raw json text only. Here's the code:";
 
 app.get("/", (req, res) => res.send("Hello!"));
+
+// code execution
+app.post("/execute", async (req, res) => {
+  const { code } = req.body;
+  let runtime = null;
+
+  const output = [];
+  const context = { console: { log: (msg) => output.push(msg) } };
+
+  try {
+    const vmc = vm.createContext();
+
+    const startTime = Date.now();
+    vmc.runInContext(code, context);
+    runtime = (Date.now() - startTime) / 1000;
+    res.json({ output, runtime });
+  } catch (error) {
+    console.error("Execution error:", error);
+    output.push(`Runtime Error: ${error.message}`);
+    res.json({
+      output,
+      runtime: null,
+      error: error.message,
+    });
+  }
+});
 
 // fetching
 app.get("/puzzle/:year/:day", async (req, res) => {

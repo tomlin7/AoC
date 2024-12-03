@@ -1,9 +1,9 @@
 export interface FetchError {
-    message: string;
-    status?: number;
+  message: string;
+  status?: number;
 }
 
 export interface PuzzleData {
-    content: string;
-    error?: FetchError;
+  content: string;
+  error?: FetchError;
 }

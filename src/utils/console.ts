@@ -1,4 +1,4 @@
-type ConsoleMethod = 'log' | 'error' | 'warn' | 'info';
+type ConsoleMethod = "log" | "error" | "warn" | "info";
 
 export class ConsoleCapture {
   private output: string[] = [];
@@ -9,19 +9,25 @@ export class ConsoleCapture {
       log: console.log,
       error: console.error,
       warn: console.warn,
-      info: console.info
+      info: console.info,
     };
   }
 
   start() {
     this.output = [];
-    
-    const methods: ConsoleMethod[] = ['log', 'error', 'warn', 'info'];
-    methods.forEach(method => {
+
+    const methods: ConsoleMethod[] = ["log", "error", "warn", "info"];
+    methods.forEach((method) => {
       console[method] = (...args: any[]) => {
-        this.output.push(args.map(arg => 
-          typeof arg === 'object' ? JSON.stringify(arg, null, 2) : String(arg)
-        ).join(' '));
+        this.output.push(
+          args
+            .map((arg) =>
+              typeof arg === "object"
+                ? JSON.stringify(arg, null, 2)
+                : String(arg)
+            )
+            .join(" ")
+        );
         this.originalConsole[method](...args);
       };
     });

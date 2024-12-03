@@ -1,4 +1,4 @@
-import { fetchWithTimeout } from '../utils/fetch';
+import { fetchWithTimeout } from "../utils/fetch";
 
 interface AnalysisResponse {
   timeComplexity: string;
@@ -7,24 +7,27 @@ interface AnalysisResponse {
 
 export async function analyzeCode(code: string): Promise<AnalysisResponse> {
   try {
-    const response = await fetchWithTimeout('http://localhost:3001/api/analyze', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ code }),
-    });
+    const response = await fetchWithTimeout(
+      "http://localhost:3001/api/analyze",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ code }),
+      }
+    );
 
     if (!response.ok) {
-      throw new Error('Analysis failed');
+      throw new Error("Analysis failed");
     }
 
     return await response.json();
   } catch (error) {
-    console.error('Error analyzing code:', error);
+    console.error("Error analyzing code:", error);
     return {
-      timeComplexity: 'Analysis failed',
-      spaceComplexity: 'Analysis failed',
+      timeComplexity: "Analysis failed",
+      spaceComplexity: "Analysis failed",
     };
   }
 }

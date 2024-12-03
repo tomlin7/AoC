@@ -6,13 +6,11 @@ import { PerformancePanel } from "./components/performance";
 import { TimeRemaining } from "./components/time";
 import { YearDaySelector } from "./components/YearDay";
 import { fetchPuzzle } from "./services/adventOfCode";
+import { executeCode } from "./services/codeExecution";
 import { analyzeCode } from "./services/performanceAnalysis";
 import type { FetchError } from "./services/types";
 import { colors } from "./theme/colors";
-import { ConsoleCapture } from "./utils/console";
 import { getCurrentPuzzleInfo } from "./utils/time";
-
-const consoleCapture = new ConsoleCapture();
 
 function App() {
   const currentPuzzle = getCurrentPuzzleInfo();
@@ -57,43 +55,29 @@ function App() {
     setPerformance((prev) => ({ ...prev, isAnalyzing: true }));
 
     try {
-      const analysis = await analyzeCode(code || "");
+      const [analysis, execution] = await Promise.all([
+        analyzeCode(code || ""),
+        executeCode(code || ""),
+      ]);
+
       setPerformance((prev) => ({
         ...prev,
         timeComplexity: analysis.timeComplexity,
         spaceComplexity: analysis.spaceComplexity,
+        runtime: execution.runtime,
         isAnalyzing: false,
       }));
-    } catch (error) {
+
+      setConsoleOutput(execution.output);
+    } catch (error: any) {
       setPerformance((prev) => ({
         ...prev,
         timeComplexity: "Analysis failed",
         spaceComplexity: "Analysis failed",
+        runtime: null,
         isAnalyzing: false,
       }));
-    }
-
-    consoleCapture.clear();
-    consoleCapture.start();
-
-    // calculate runtime
-    const startTime = new Date().getTime();
-    try {
-      eval(code);
-      const endTime = new Date().getTime();
-      setPerformance((prev) => ({
-        ...prev,
-        runtime: (endTime - startTime) / 1000,
-      }));
-    } catch (error) {
-      console.error("Error running code:", error);
-      setPerformance((prev) => ({
-        ...prev,
-        runtime: null,
-      }));
-    } finally {
-      consoleCapture.stop();
-      setConsoleOutput(consoleCapture.getOutput());
+      setConsoleOutput(["Error running code:", error.message]);
     }
   };
 
