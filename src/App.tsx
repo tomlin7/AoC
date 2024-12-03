@@ -10,12 +10,14 @@ import { analyzeCode } from "./services/performanceAnalysis";
 import type { FetchError } from "./services/types";
 import { colors } from "./theme/colors";
 import { ConsoleCapture } from "./utils/console";
+import { getCurrentPuzzleInfo } from "./utils/time";
 
 const consoleCapture = new ConsoleCapture();
 
 function App() {
-  const [year, setYear] = useState(2024);
-  const [day, setDay] = useState(1);
+  const currentPuzzle = getCurrentPuzzleInfo();
+  const [year, setYear] = useState(currentPuzzle.year);
+  const [day, setDay] = useState(currentPuzzle.day);
   const [puzzleContent, setPuzzleContent] = useState("");
   const [error, setError] = useState<FetchError | undefined>();
   const [code, setCode] = useState(
@@ -95,6 +97,11 @@ function App() {
     }
   };
 
+  const handleNextPuzzleClick = (nextYear: number, nextDay: number) => {
+    setYear(nextYear);
+    setDay(nextDay);
+  };
+
   return (
     <div
       className="h-screen flex flex-col bg-gray-100"
@@ -157,7 +164,7 @@ function App() {
           </div>
         </div>
 
-        <TimeRemaining />
+        <TimeRemaining onNextPuzzleClick={handleNextPuzzleClick} />
 
         <div className="max-w-full px-4 py-4">
           <div className="flex justify-between items-end">
