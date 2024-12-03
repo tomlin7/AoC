@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { Description } from "./components/Description";
 import { MonacoEditor } from "./components/Editor";
 import { PerformancePanel } from "./components/performance";
+import { TimeRemaining } from "./components/time";
 import { YearDaySelector } from "./components/YearDay";
 import { fetchPuzzle } from "./services/adventOfCode";
 import { analyzeCode } from "./services/performanceAnalysis";
@@ -101,7 +102,7 @@ function App() {
     >
       <header
         style={{ backgroundColor: colors.blue, borderColor: colors.bg1 }}
-        className="border-b flex justify-between "
+        className="border-b flex justify-between"
       >
         <div className="flex">
           <div
@@ -156,15 +157,10 @@ function App() {
           </div>
         </div>
 
+        <TimeRemaining />
+
         <div className="max-w-full px-4 py-4">
           <div className="flex justify-between items-end">
-            {/* <div className="flex items-center">
-              <Github
-                className="h-6 w-6"
-                style={{ color: colors.yellow }}
-                onClick={openGithub}
-              />
-            </div> */}
             <YearDaySelector
               year={year}
               day={day}
