@@ -12,11 +12,13 @@ Also includes a notification daemon for daily AoC challenge notifications during
 
 ## Getting Started
 
-You will need bun/npm:
+1. [Open the app](https://aoc24.vercel.app/)
+2. You will notice it fails to fetch data or generate benchmarks for your code. You will have to run the backend yourself.
+3. Get a [Gemini API key](https://ai.google.dev/gemini-api/docs/api-key). Set it as an environment variable: `set API_KEY=YOUR_KEY` or `export API_KEY=YOUR_KEY`
+4. You will need bun/npm:
+  ```bash
+  bun i
+  bun run dev
+  ```
 
-```bash
-bun i
-bun run dev
-```
-
-thats it! You can now visit `localhost:5173` to see the app.
+That's it! Now just [refresh the app](https://aoc24.vercel.app/).
