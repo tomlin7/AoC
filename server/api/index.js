@@ -5,7 +5,11 @@ const vm = require("node:vm");
 const app = express();
 const PORT = 3001;
 
-app.use(cors());
+app.use(
+  cors({
+    origin: "*",
+  })
+);
 app.use(express.json());
 
 const genAI = new GoogleGenerativeAI(process.env.API_KEY);

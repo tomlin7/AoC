@@ -1,3 +1,5 @@
+import { BASE_URL } from "./constants";
+
 interface ExecutionResult {
   output: string[];
   runtime: number | null;
@@ -6,7 +8,7 @@ interface ExecutionResult {
 
 export async function executeCode(code: string): Promise<ExecutionResult> {
   try {
-    const response = await fetch("http://localhost:3001/api/execute", {
+    const response = await fetch(`${BASE_URL}/execute`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

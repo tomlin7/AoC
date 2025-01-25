@@ -1,5 +1,5 @@
-export const BASE_URL = 'http://localhost:3001/api/puzzle';
+export const BASE_URL = "http://aoc-flhj.onrender.com";
 
 export const HEADERS = {
-  'Accept': 'application/json',
+  Accept: "application/json",
 };

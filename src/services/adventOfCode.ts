@@ -28,10 +28,13 @@ export async function fetchPuzzle(
   day: number
 ): Promise<PuzzleData> {
   try {
-    const response = await fetchWithTimeout(`${BASE_URL}/${year}/${day}`, {
-      headers: HEADERS,
-      credentials: "omit",
-    });
+    const response = await fetchWithTimeout(
+      `${BASE_URL}/puzzle/${year}/${day}`,
+      {
+        headers: HEADERS,
+        credentials: "omit",
+      }
+    );
 
     if (!response.ok) {
       const error: FetchError = {
