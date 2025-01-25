@@ -23,15 +23,18 @@ app.get("/", (req, res) => res.send("Hello!"));
 app.post("/execute", async (req, res) => {
   const { code } = req.body;
   let runtime = null;
-
   const output = [];
-  const context = { console: { log: (msg) => output.push(msg) } };
+
+  const context = vm.createContext({
+    console: {
+      log: (msg) => output.push(msg),
+    },
+  });
 
   try {
-    const vmc = vm.createContext();
-
     const startTime = Date.now();
-    vmc.runInContext(code, context);
+    const script = new vm.Script(code);
+    script.runInContext(context);
     runtime = (Date.now() - startTime) / 1000;
     res.json({ output, runtime });
   } catch (error) {
